@@ -1,0 +1,24 @@
+server:
+  port: 8847
+spring:
+  cloud:
+    nacos:
+      config:
+        enabled: false
+      discovery:
+        server-addr: 'localhost:8848'
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          filters:
+            - StripPrefix=1
+    loadbalancer:
+      retry:
+        enabled: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: TRACE
