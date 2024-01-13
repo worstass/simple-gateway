@@ -11,14 +11,7 @@ spring:
       discovery:
         locator:
           enabled: true
-#          lower-case-service-id: true
-          filters:
-            - StripPrefix=1
-    loadbalancer:
-      retry:
-        enabled: true
-
 logging:
   level:
     root: INFO
-    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.gateway: INFO

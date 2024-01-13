@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nacos:
+    image: nacos/nacos-server:v2.0.4-slim
+    environment:
+      MODE: standalone
+      NACOS_AUTH_ENABLE: 'false'
+    ports:
+      - '8848:8848'
+      - '9848:9848'
