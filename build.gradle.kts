@@ -62,7 +62,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<BootBuildImage> {
-    builder = "paketobuildpacks/builder:tiny"
+//    builder = "paketobuildpacks/builder:tiny"
     imageName = properties.getProperty("dockerImageName") ?: project.name
     publish = false
     environment = mapOf(
