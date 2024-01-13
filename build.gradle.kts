@@ -62,6 +62,11 @@ tasks.withType<Test> {
 }
 
 tasks.withType<BootBuildImage> {
+    builder = "paketobuildpacks/builder:tiny"
     imageName = properties.getProperty("dockerImageName") ?: project.name
     publish = false
+    environment = mapOf(
+        "BP_NATIVE_IMAGE" to "true",
+        "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "-march=compatibility"
+    )
 }
