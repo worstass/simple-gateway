@@ -1,5 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 import java.net.URI
+import java.util.Properties
+
+var properties = Properties()
+if (rootProject.file("local.properties").exists()) {
+    properties.load(rootProject.file("local.properties").inputStream())
+}
 
 plugins {
     id("org.springframework.boot") version "3.2.1"
@@ -52,4 +59,9 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.withType<BootBuildImage> {
+    imageName = properties.getProperty("dockerImageName") ?: project.name
+    publish = false
 }
