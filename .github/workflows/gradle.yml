@@ -1,3 +1,6 @@
+on:
+  push:
+    branches: [ "master" ]
 jobs:
   build_and_push:
     name: Build with gradle and push image to Docker Hub
