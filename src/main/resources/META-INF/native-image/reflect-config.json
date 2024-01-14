@@ -1,0 +1,17 @@
+[
+  {
+    "name": "com.alibaba.cloud.nacos.NacosServiceInstance",
+    "fields": [
+      { "name": "serviceId" }
+    ],
+    "methods": [
+      { "name": "getServiceId", "parameterTypes": [] }
+    ]
+  },
+  {
+    "name": "org.springframework.cloud.client.ServiceInstance",
+    "methods": [
+      { "name": "getServiceId", "parameterTypes": [] }
+    ]
+  }
+]

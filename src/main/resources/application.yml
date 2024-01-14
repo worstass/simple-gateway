@@ -10,19 +10,11 @@ spring:
       discovery:
         server-addr: 'localhost:8848'
     gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#          lower-case-service-id: true
-#          filters:
-#            - StripPrefix=1
-      routes:
-        - id: greeting
-          uri: lb://greeting
-          predicates:
-            - Path=/greeting/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
           filters:
-#            - RewritePath=/greeting/(?<segment>.*),/$\{segment}
             - StripPrefix=1
 logging:
   level:

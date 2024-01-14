@@ -10,14 +10,14 @@ if (rootProject.file("local.properties").exists()) {
 }
 
 plugins {
-    id("org.springframework.boot") version "3.0.13"
+    id("org.springframework.boot") version "3.2.1"
     id("io.spring.dependency-management") version "1.1.4"
     id("org.graalvm.buildtools.native") version "0.9.28"
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.spring") version "1.9.21"
 }
 
-group = "com.zhmap.gateway"
+group = "com.example.gateway"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -34,13 +34,14 @@ repositories {
     google()
 }
 
-extra["springCloudVersion"] = "2022.0.4"
+extra["springCloudVersion"] = "2023.0.0"
 extra["springCloudAlibabaVersion"] = "2022.0.0.0"
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+    implementation("org.springframework.security:spring-security-core")
 //    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:kotlin-extensions")
@@ -64,15 +65,23 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+
 graalvmNative {
+    agent {
+        defaultMode ="standard"
+    }
     binaries {
         all {
+            buildArgs.add("-Ob")
             resources.autodetect()
-            javaLauncher = javaToolchains.launcherFor {
-                languageVersion = JavaLanguageVersion.of(21)
-                vendor =  JvmVendorSpec.GRAAL_VM
-            }
+//            javaLauncher = javaToolchains.launcherFor {
+//                languageVersion = JavaLanguageVersion.of(21)
+//                vendor =  JvmVendorSpec.GRAAL_VM
+//            }
         }
+    }
+    metadataRepository {
+        enabled = true
     }
 }
 
