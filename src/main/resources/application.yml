@@ -1,6 +1,8 @@
 server:
   port: 8847
 spring:
+  aot:
+    enabled: true
   cloud:
     nacos:
       config:
@@ -8,10 +10,21 @@ spring:
       discovery:
         server-addr: 'localhost:8848'
     gateway:
-      discovery:
-        locator:
-          enabled: true
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
+#          filters:
+#            - StripPrefix=1
+      routes:
+        - id: greeting
+          uri: lb://greeting
+          predicates:
+            - Path=/greeting/**
+          filters:
+#            - RewritePath=/greeting/(?<segment>.*),/$\{segment}
+            - StripPrefix=1
 logging:
   level:
     root: INFO
-    org.springframework.cloud.gateway: INFO
+    org.springframework.cloud.gateway: TRACE
