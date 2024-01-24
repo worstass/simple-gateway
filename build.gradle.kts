@@ -42,6 +42,11 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+    implementation("org.springframework.cloud:spring-cloud-sleuth-otel-autoconfigure")
+    implementation("org.springframework.cloud:spring-cloud-starter-sleuth") {
+        exclude("org.springframework.cloud:spring-cloud-sleuth-brave")
+    }
+
     implementation("org.springframework.security:spring-security-core")
 //    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
